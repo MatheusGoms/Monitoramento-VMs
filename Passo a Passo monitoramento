@@ -1,0 +1,54 @@
+Para implementar monitoramento no Azure, você pode seguir estas etapas básicas, focando no uso de Azure Monitor e Log Analytics. O Azure Monitor é a solução integrada da Microsoft para coletar, analisar e agir sobre dados de monitoramento de seus recursos em nuvem. Aqui está um guia passo a passo:
+
+Passo 1: Configurar o Azure Monitor
+Acesse o Portal do Azure:
+
+Faça login na sua conta do Azure no Portal do Azure.
+Criar ou selecionar um recurso:
+
+Se você ainda não tiver uma máquina virtual (VM) ou outro recurso, crie um. Para este exemplo, você pode criar uma VM.
+Ao criar a VM, você pode habilitar a coleta de dados de monitoramento durante a configuração.
+
+Passo 2: Criar um Log Analytics Workspace
+Criar um Workspace:
+No portal do Azure, procure por "Log Analytics Workspaces".
+Clique em "Adicionar" para criar um novo workspace.
+Preencha as informações necessárias, como nome, assinatura, grupo de recursos e região.
+
+Passo 3: Conectar a VM ao Log Analytics
+Habilitar Monitoramento:
+Após criar o Log Analytics Workspace, vá para a sua máquina virtual.
+No menu da VM, clique em "Extensões".
+Adicione a extensão "Microsoft Monitoring Agent" e conecte-a ao seu Log Analytics Workspace.
+
+Passo 4: Configurar Coleta de Dados
+Configurar a Coleta de Dados:
+No seu Log Analytics Workspace, vá para "Configurações" > "Configuração de Dados".
+Ative a coleta de dados para métricas e logs, conforme necessário.
+Você pode escolher coletar logs do sistema, logs de aplicativos e outros dados relevantes.
+
+Passo 5: Criar Alertas
+Configurar Regras de Alerta:
+No portal do Azure, vá para "Monitor" e selecione "Alertas".
+Clique em "Nova Regra de Alerta".
+Selecione a condição que você deseja monitorar (por exemplo, uso da CPU, status da VM).
+Defina um grupo de ação que especifica quem deve ser notificado quando o alerta for acionado.
+
+Passo 6: Consultar Dados no Log Analytics
+Consultas no Log Analytics:
+No seu Log Analytics Workspace, vá para "Logs".
+Utilize a linguagem Kusto Query Language (KQL) para escrever consultas e analisar os dados coletados.
+Exemplo de consulta para verificar o uso da CPU:
+kqlCopiar código
+Perf
+| where ObjectName == "Processor" and CounterName == "% Processor Time"
+| summarize AvgCpuUsage = avg(CounterValue) by bin(TimeGenerated, 5m)
+
+Passo 7: Visualização e Relatórios
+Criar Painéis:
+Você pode criar painéis no Azure para visualizar métricas e logs de forma gráfica.
+Vá para "Painéis" no portal do Azure e crie um novo painel, adicionando os gráficos e métricas que deseja monitorar.
+
+Passo 8: Revisão e Ajustes
+Revisar Configurações:
+Regularmente, revise suas configurações de monitoramento e ajuste os alertas e consultas conforme necessário para garantir que você esteja recebendo as informações corretas.
